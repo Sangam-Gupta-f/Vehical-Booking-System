@@ -1,0 +1,53 @@
+import  {Vehicle}  from "../models/Vehicle.js";
+import { Booking } from "../models/Booking.js";
+const addVehicle = async (req, res) => {
+    const {name, capacityKg, tyres} = req.body;
+    try{
+        const vehicle = new Vehicle({ name, capacityKg, tyres });
+        await vehicle.save();
+       return res.status(201).json({ message: 'Vehicle added successfully', vehicle });
+    }catch(error){
+        console.error(error);
+      return res.status(500).json({ message: 'Server error' });
+    }
+}
+
+const available = async (req, res) => {
+  try {
+
+    const { capacityRequired, fromPincode, toPincode, startTime } = req.query;
+
+    const requiredCapacity = parseInt(capacityRequired);
+    const rideStartTime = new Date(startTime);
+
+    const estimatedRideDurationHours =
+      Math.abs(parseInt(toPincode) - parseInt(fromPincode)) % 24;
+
+    const rideEndTime = new Date(
+      rideStartTime.getTime() + estimatedRideDurationHours * 60 * 60 * 1000
+    );
+
+    // available vehicles
+    const vehicles = await Vehicle.find({
+      capacityKg: { $gte: requiredCapacity },
+      _id: {
+        $nin: await Booking.find({
+          startDate: { $lt: rideEndTime },
+          endDate: { $gt: rideStartTime }
+        }).distinct("vehicleId")
+      }
+    });
+
+    return res.status(200).json({
+      message: "Available vehicles fetched successfully",
+      vehicles,
+      estimatedRideDurationHours
+    });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: "Server error" });
+  }
+};
+
+
+export { addVehicle, available };

@@ -5,9 +5,9 @@ const bookingSchema = new mongoose.Schema({
         ref: 'User',
         required: true
     },
-    vehicalId:{
+    vehicleId:{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Vehical',
+        ref: 'Vehicle',
         required: true
     },
     fromPincode:{
