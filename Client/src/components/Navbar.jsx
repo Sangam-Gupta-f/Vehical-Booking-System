@@ -1,8 +1,14 @@
-import React from "react";
+import React , { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 function Navbar() {
+  const [isLogin, setIsLogin] = useState(false);
   const token = localStorage.getItem("token");
+  useEffect(()=>{
+    if(token) {
+      setIsLogin(true);  
+    }
+  }, [token]);
 
   return (
     <nav className="flex justify-end items-center gap-6 py-4">
