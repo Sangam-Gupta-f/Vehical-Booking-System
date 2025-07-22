@@ -1,24 +1,61 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React from "react";
+import { Link } from "react-router-dom";
+
 function Navbar() {
-    const user = JSON.parse(localStorage.getItem('user'));  
+  const token = localStorage.getItem("token");
+
   return (
-    <div>
-      <Link to="/">Home</Link>
-      {user ? (
+    <nav className="flex justify-end items-center gap-6 py-4">
+      <Link
+        to="/"
+        className="text-white hover:text-blue-400 transition font-medium"
+      >
+        Home
+      </Link>
+
+      {token ? (
         <>
-          <Link to="/logout">Logout</Link>
-          <Link to="/check-vehicle">Book Vehicle</Link>
-          <Link to="/add-vehicle">Add Vehicle</Link>
+          <button
+            onClick={() => {
+              localStorage.removeItem("token");
+              localStorage.removeItem("user");
+              window.location.href = "/login";
+            }}
+            className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-md font-semibold transition"
+          >
+            Logout
+          </button>
+          <Link
+            to="/check-vehicle"
+            className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md font-semibold transition"
+          >
+            Book Vehicle
+          </Link>
+          <Link
+            to="/add-vehicle"
+            className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md font-semibold transition"
+          >
+            Add Vehicle
+          </Link>
         </>
       ) : (
         <>
-          <Link to="/register">Register</Link>
-          <Link to="/login">Login</Link>
+          <Link
+            to="/register"
+            className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md font-semibold transition"
+          >
+            Register
+          </Link>
+          <Link
+            to="/login"
+            className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md font-semibold transition"
+          >
+            Login
+          </Link>
         </>
       )}
-    </div>
-  )
+    </nav>
+  );
 }
 
-export default Navbar
+export default Navbar;

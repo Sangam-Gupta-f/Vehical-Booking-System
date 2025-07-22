@@ -7,6 +7,7 @@ import Register from './pages/Register'
 import Login from './pages/Login'
 import AddVehicle from './pages/AddVehicle'
 import CheckVehicle from './pages/CheckVehicle' 
+import ProtectedRoutes from './components/ProtectedRoutes'
 function App() {
 
   return (
@@ -16,8 +17,8 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/add-vehicle" element={<AddVehicle />} />
-        <Route path="/check-vehicle" element={<CheckVehicle />} />
+        <Route path="/add-vehicle" element={<ProtectedRoutes><AddVehicle /></ProtectedRoutes>} />
+        <Route path="/check-vehicle" element={<ProtectedRoutes><CheckVehicle /></ProtectedRoutes>} />
       </Routes>
       <Footer />
     </div>

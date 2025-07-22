@@ -35,7 +35,11 @@ const login=async(req,res)=>{
         }
         else{
             const token=jwt.sign({id:user._id},process.env.JWT_SECRET,{expiresIn:'1h'});
-            return res.status(200).json({token, message: 'Login successful' });
+            return res.status(200).json({token, message: 'Login successful' , user: {
+                _id: user._id,
+                name: user.name,
+                email: user.email
+            }});
         }
     }catch(error){
         console.error(error);
