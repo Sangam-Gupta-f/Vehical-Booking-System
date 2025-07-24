@@ -15,12 +15,14 @@ function AddVehicle() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const token = localStorage.getItem("token");
     try {
       const response = await fetch(
         `${import.meta.env.VITE_API_URL}/api/vehicle/add`,
         {
           method: "POST",
           headers: {
+            "Authorization": `Bearer ${token}`,
             "Content-Type": "application/json",
           },
           body: JSON.stringify(formData),
