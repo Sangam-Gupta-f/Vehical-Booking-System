@@ -27,7 +27,7 @@ function Login() {
         setSuccess(true);
         setError(false);
        const data = await response.json();
-       localStorage.setItem("token", JSON.stringify(data.token));
+       localStorage.setItem("token", data.token);
        localStorage.setItem("user", JSON.stringify(data.user));
         setTimeout(()=>{
           navigate("/");

@@ -1,17 +1,28 @@
-import React , { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
-function Navbar() {
+function Navbar({ isMobile }) {
   const [isLogin, setIsLogin] = useState(false);
-  const token = localStorage.getItem("token");
-  useEffect(()=>{
-    if(token) {
-      setIsLogin(true);  
-    }
-  }, [token]);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    setIsLogin(!!token);
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    navigate("/login");
+    window.location.reload();
+  };
 
   return (
-    <nav className="flex justify-end items-center gap-6 py-4">
+    <nav
+      className={`${
+        isMobile ? "flex flex-col space-y-3" : "flex items-center gap-6"
+      }`}
+    >
       <Link
         to="/"
         className="text-white hover:text-blue-400 transition font-medium"
@@ -19,14 +30,10 @@ function Navbar() {
         Home
       </Link>
 
-      {token ? (
+      {isLogin ? (
         <>
           <button
-            onClick={() => {
-              localStorage.removeItem("token");
-              localStorage.removeItem("user");
-              window.location.href = "/login";
-            }}
+            onClick={handleLogout}
             className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-md font-semibold transition"
           >
             Logout

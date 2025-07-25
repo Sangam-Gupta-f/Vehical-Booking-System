@@ -3,8 +3,8 @@ import React from 'react';
 function Home() {
   return (
     <div className="bg-gray-900 text-white min-h-screen">
-      {/* Hero Section */}
-      <section className="lg:flex justify-between items-center px-6 lg:px-20 py-12">
+
+      <section className="md:flex justify-between items-center px-6 lg:px-20 py-12">
         <div className="max-w-lg">
           <h1 className="text-4xl lg:text-5xl font-bold leading-tight mb-4">
             Book Logistics Vehicles
@@ -23,8 +23,7 @@ function Home() {
         </div>
       </section>
 
-      {/* Why Choose Us Section */}
-      <section className="lg:flex justify-between items-center px-6 lg:px-20 py-12 bg-gray-800 rounded-t-3xl">
+      <section className="md:flex justify-between items-center px-6 lg:px-20 py-12 bg-gray-800 rounded-t-3xl">
         <div className="max-w-lg">
           <h2 className="text-3xl font-bold mb-4">Why Choose Us?</h2>
           <p className="text-gray-300 text-lg leading-relaxed">
