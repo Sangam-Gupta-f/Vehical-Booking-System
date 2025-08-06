@@ -47,4 +47,19 @@ const login=async(req,res)=>{
     }
 }
 
-export {register,login};
+const profile=async(req,res)=>{
+    const {id}=req.body;
+    console.log(id);
+    try {
+        const user=await User.findById(id).select("-password");
+        if(!user){
+            return res.status(404).json({message:"user not found"});
+        }
+        return res.status(200).json({message:"user fetch successfully", user});
+    } catch (error) {
+        console.log(error)
+        return res.status(500).json({ message: 'Getting User data failed , Server error' });
+    }
+}
+
+export {register,login, profile};

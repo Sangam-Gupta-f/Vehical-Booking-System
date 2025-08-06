@@ -1,9 +1,9 @@
 import  {Vehicle}  from "../models/Vehicle.js";
 import { Booking } from "../models/Booking.js";
 const addVehicle = async (req, res) => {
-    const {name, capacityKg, tyres} = req.body;
+    const {userId, name, capacityKg, tyres} = req.body;
     try{
-        const vehicle = new Vehicle({ name, capacityKg, tyres });
+        const vehicle = new Vehicle({ userId, name, capacityKg, tyres });
         await vehicle.save();
        return res.status(201).json({ message: 'Vehicle added successfully', vehicle });
     }catch(error){
@@ -49,5 +49,20 @@ const available = async (req, res) => {
   }
 };
 
+const getVehicle = async (req, res) => {
+  const { id } = req.body;
+  try{
+     const vehicle=await Vehicle.find({userId:id});
+     if(!vehicle){
+       return res.status(404).json({ message: 'Vehicle not found' });
+     }
+     return res.status(200).json({ message: 'Vehicle fetched successfully', vehicle });
+  }
+  catch(error){
+    console.error(error);
+    return res.status(500).json({ message: 'Server error' });
+  }
+}
 
-export { addVehicle, available };
+
+export { addVehicle, available, getVehicle };

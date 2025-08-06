@@ -25,4 +25,13 @@ const createBooking = async (req, res) => {
     }
 }
 
-export { createBooking };
+const getBooking=async (req, res)=>{
+    const {id}=req.body;
+    try {
+        const data=await Booking.find({userId:id});
+        return res.status(200).json({message:'Booking fetch successfully' , data});
+    } catch (error) {
+        return res.status(500).json({message:'Getting User data failed , Server error'},error);
+    }
+}
+export { createBooking , getBooking};
