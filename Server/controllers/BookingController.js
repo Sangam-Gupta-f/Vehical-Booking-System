@@ -26,7 +26,7 @@ const createBooking = async (req, res) => {
 }
 
 const getBooking=async (req, res)=>{
-    const {id}=req.body;
+    const {id}=req.query;
     try {
         const data=await Booking.find({userId:id});
         return res.status(200).json({message:'Booking fetch successfully' , data});

@@ -50,7 +50,8 @@ const available = async (req, res) => {
 };
 
 const getVehicle = async (req, res) => {
-  const { id } = req.body;
+  const { id } = req.query;
+  console.log(id);
   try{
      const vehicle=await Vehicle.find({userId:id});
      if(!vehicle){

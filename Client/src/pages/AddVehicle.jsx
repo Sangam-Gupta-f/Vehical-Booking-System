@@ -1,14 +1,16 @@
 import React, { useState } from "react";
 
 function AddVehicle() {
+  const user=JSON.parse(localStorage.getItem('user'));
   const [formData, setFormData] = useState({
+    userId: user ? user._id : "",
     name: "",
     capacityKg: "",
     tyres: "",
   });
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(false);
-
+  
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };

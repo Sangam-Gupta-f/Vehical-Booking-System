@@ -48,7 +48,7 @@ const login=async(req,res)=>{
 }
 
 const profile=async(req,res)=>{
-    const {id}=req.body;
+    const {id}=req.query;
     console.log(id);
     try {
         const user=await User.findById(id).select("-password");

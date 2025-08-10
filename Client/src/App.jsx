@@ -7,6 +7,7 @@ import Register from './pages/Register'
 import Login from './pages/Login'
 import AddVehicle from './pages/AddVehicle'
 import CheckVehicle from './pages/CheckVehicle' 
+import Dashboard from './pages/Dashboard'
 import ProtectedRoutes from './components/ProtectedRoutes'
 function App() {
 
@@ -19,6 +20,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/add-vehicle" element={<ProtectedRoutes><AddVehicle /></ProtectedRoutes>} />
         <Route path="/check-vehicle" element={<ProtectedRoutes><CheckVehicle /></ProtectedRoutes>} />
+        <Route path="/dashboard" element={<ProtectedRoutes><Dashboard /></ProtectedRoutes>} />
       </Routes>
       <Footer />
     </div>
